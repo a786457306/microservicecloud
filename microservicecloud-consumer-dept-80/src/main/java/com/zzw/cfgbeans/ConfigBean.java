@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class ConfigBean {
 
     // 配置bean id，返回bean对应的class的对象
+    // 配置restTemplate以便于远程调用
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();

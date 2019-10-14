@@ -28,6 +28,7 @@ public class DeptController_Consumer {
     @Autowired
     private RestTemplate restTemplate;
 
+    // 后面不加method说明几种方法都可以访问到
     @RequestMapping(value = "/add")
     public boolean add(Dept dept) {
         return restTemplate.postForObject(
@@ -44,6 +45,7 @@ public class DeptController_Consumer {
                 Dept.class);
     }
 
+    @PostMapping
     @RequestMapping(value = "/list")
     public List<Dept> list()
     {

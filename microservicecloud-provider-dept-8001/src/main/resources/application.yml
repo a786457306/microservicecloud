@@ -15,7 +15,7 @@ mybatis:
 
 spring:
   application:
-    # 重要，用于部署服务，对外暴露的微服务名字
+    # 重要，用于部署服务，对外暴露的微服务名字，默认变为全大写
     name: microservicecloud-dept
   # alibaba类似jdbc的配置
   datasource:
@@ -33,15 +33,20 @@ spring:
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
-      #defaultZone: http://localhost:7001/eureka
-      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+#      注册进的服务的默认地址
+      defaultZone: http://localhost:7001/eureka
+#      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+#  修改注册中心显示的服务实例名称，方便定位具体机器，也便于定位ip
   instance:
     instance-id: microservicecloud-dept8001
     prefer-ip-address: true     #访问路径可以显示IP地址
 
+# 追加关于微服务信息的描述，点开服务报告时可见
 info:
-  app.name: atguigu-microservicecloud
-  company.name: www.atguigu.com
+  app.name: zzw-microservicecloud
+  company.name: www.zzw.com
+# 可灵活添加的部分，$$之间的就是pom中maven-resources插件来进行填充和配置的
+# 在这里配置之后再显示就可以自动填充项目信息了
   build.artifactId: $project.artifactId$
   build.version: $project.version$
 
