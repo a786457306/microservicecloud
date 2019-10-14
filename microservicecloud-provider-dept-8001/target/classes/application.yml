@@ -1,0 +1,47 @@
+# 该服务端口为8001
+server:
+  port: 8001
+
+# 整合mybatis
+mybatis:
+  # mybatis配置文件所在路径。其实内容已经写进spring了，这里面没啥东西了。可以开启二级缓存进行优化。
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  # 所有Entity别名类所在包
+  type-aliases-package: com.zzw.entities
+  # mapper映射文件，如DeptMapper.xml
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml
+
+
+spring:
+  application:
+    # 重要，用于部署服务，对外暴露的微服务名字
+    name: microservicecloud-dept
+  # alibaba类似jdbc的配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
+    url: jdbc:mysql://localhost:3306/cloudDB01              # 数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      #defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: microservicecloud-dept8001
+    prefer-ip-address: true     #访问路径可以显示IP地址
+
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
